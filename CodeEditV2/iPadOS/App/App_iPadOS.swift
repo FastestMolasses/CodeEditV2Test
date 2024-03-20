@@ -11,9 +11,7 @@ import SwiftUI
 @main
 struct CodeEdit: App {
     var body: some Scene {
-        WindowGroup {
-            WelcomeView()
-        }
+        WelcomeWindow()
     }
 }
 #endif
