@@ -24,11 +24,11 @@ struct WelcomeWindowView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            WelcomeView(
-                openDocument: openDocument,
-                newDocument: newDocument,
-                dismissWindow: dismissWindow
-            )
+//            WelcomeView(
+//                openDocument: openDocument,
+//                newDocument: newDocument,
+//                dismissWindow: dismissWindow
+//            )
             RecentProjectsListView(openDocument: openDocument, dismissWindow: dismissWindow)
                 .frame(width: 280)
         }

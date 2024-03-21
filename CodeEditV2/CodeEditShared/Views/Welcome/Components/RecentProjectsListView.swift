@@ -49,14 +49,14 @@ struct RecentProjectsListView: View {
             case 0:
                 EmptyView()
             default:
+#if os(macOS)
                 Button("Show in Finder") {
                     NSWorkspace.shared.activateFileViewerSelecting(Array(items))
                 }
-
+#endif
                 Button("Copy path\(items.count > 1 ? "s" : "")") {
-                    let pasteBoard = NSPasteboard.general
-                    pasteBoard.clearContents()
-                    pasteBoard.writeObjects(selection.map(\.relativePath) as [NSString])
+                    pasteboardService.clear()
+                    pasteboardService.copy(selection.map(\.relativePath))
                 }
 
                 Button("Remove from Recents") {
@@ -68,6 +68,7 @@ struct RecentProjectsListView: View {
                 openDocument($0, dismissWindow)
             }
         }
+#if os(macOS)
         .onCopyCommand {
             selection.map {
                 NSItemProvider(object: $0.path(percentEncoded: false) as NSString)
@@ -82,6 +83,7 @@ struct RecentProjectsListView: View {
             // Ideally, this should be 'whenever a doc opens/closes'.
             updateRecentProjects()
         }
+#endif
         .background {
             Button("") {
                 selection.forEach {

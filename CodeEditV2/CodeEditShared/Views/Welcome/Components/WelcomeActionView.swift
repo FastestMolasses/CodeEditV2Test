@@ -41,7 +41,11 @@ struct WelcomeActionButtonStyle: ButtonStyle {
             .contentShape(Rectangle())
             .padding(7)
             .frame(height: 36)
-            .background(Color(.labelColor).opacity(configuration.isPressed ? 0.1 : 0.05))
+            #if os(iOS)
+            .background(Color(UIColor.label).opacity(configuration.isPressed ? 0.1 : 0.05))
+            #elseif os(macOS)
+            .background(Color(NSColor.labelColor).opacity(configuration.isPressed ? 0.1 : 0.05))
+            #endif
             .cornerRadius(8)
     }
 }

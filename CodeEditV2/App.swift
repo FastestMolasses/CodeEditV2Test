@@ -12,11 +12,9 @@ struct CodeEdit: App {
     init() {
         setupServiceContainer()
     }
-    
+
     var body: some Scene {
-#if os(iOS)
-        WelcomeWindow()
-#endif
+        WelcomeScene()
     }
 }
 

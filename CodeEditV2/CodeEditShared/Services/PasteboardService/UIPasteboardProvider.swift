@@ -13,6 +13,11 @@ import UIKit
 /// hold state in the future, consider using a final class or a struct instead.
 enum UIPasteboardProvider: PasteboardProvider {
     @inline(__always)
+    static func clear() {
+        UIPasteboard.general.string = nil
+    }
+
+    @inline(__always)
     static func string() -> String? {
         return UIPasteboard.general.string
     }
@@ -20,6 +25,11 @@ enum UIPasteboardProvider: PasteboardProvider {
     @inline(__always)
     static func setString(_ string: String) {
         UIPasteboard.general.string = string
+    }
+    
+    @inline(__always)
+    static func setStrings(_ strings: [String]) {
+        UIPasteboard.general.strings = strings
     }
 }
 #endif

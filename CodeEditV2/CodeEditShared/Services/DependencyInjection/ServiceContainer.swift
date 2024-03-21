@@ -13,7 +13,7 @@ final class ServiceContainer {
         factories[String(describing: type.self)] = factory
     }
     
-    static func resolve<Service>(_ resolveType: ServiceType = .automatic, _ type: Service.Type) -> Service? {
+    static func resolve<Service>(_ resolveType: ServiceType = .singleton, _ type: Service.Type) -> Service? {
         let serviceName = String(describing: type.self)
 
         switch resolveType {
@@ -37,8 +37,6 @@ final class ServiceContainer {
             }
 
             return service
-        case .automatic:
-            fallthrough
         case .new:
             return factories[serviceName]?() as? Service
         }

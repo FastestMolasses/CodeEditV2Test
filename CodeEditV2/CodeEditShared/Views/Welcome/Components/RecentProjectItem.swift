@@ -22,10 +22,10 @@ struct RecentProjectItem: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(nsImage: NSWorkspace.shared.icon(forFile: projectPath.path(percentEncoded: false)))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
+//            Image(nsImage: NSWorkspace.shared.icon(forFile: projectPath.path(percentEncoded: false)))
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 32, height: 32)
             VStack(alignment: .leading) {
                 Text(projectPath.lastPathComponent)
                     .foregroundColor(.primary)

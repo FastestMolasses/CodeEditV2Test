@@ -10,6 +10,9 @@ import AppKit
 import Foundation
 
 struct WelcomeView: View {
+
+    @Service private var pasteboardService: PasteboardService
+    
     @Environment(\.colorScheme)
     var colorScheme
 
@@ -48,7 +51,7 @@ struct WelcomeView: View {
             reopenBehavior = new ? .welcome : .openPanel
         }
     }
-
+    
     private var appVersion: String {
         Bundle.versionString ?? ""
     }
@@ -61,21 +64,9 @@ struct WelcomeView: View {
         Bundle.versionPostfix ?? ""
     }
 
-    /// Get the macOS version & build
-    private var macOSVersion: String {
-        let url = URL(fileURLWithPath: "/System/Library/CoreServices/SystemVersion.plist")
-        guard let dict = NSDictionary(contentsOf: url),
-           let version = dict["ProductUserVisibleVersion"],
-           let build = dict["ProductBuildVersion"]
-        else {
-            return ProcessInfo.processInfo.operatingSystemVersionString
-        }
-
-        return "\(version) (\(build))"
-    }
-
     /// Return the Xcode version and build (if installed)
     private var xcodeVersion: String? {
+        #if os(macOS)
         guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.dt.Xcode"),
               let bundle = Bundle(url: url),
               let infoDict = bundle.infoDictionary,
@@ -88,21 +79,23 @@ struct WelcomeView: View {
         }
 
         return "\(version) (\(build))"
+        #else
+        return nil
+        #endif
     }
 
     /// Get program and operating system information
     private func copyInformation() {
         var copyString = "CodeEdit: \(appVersion)\(appVersionPostfix) (\(appBuild))\n"
 
-        copyString.append("macOS: \(macOSVersion)\n")
+        copyString.append("\(Bundle.systemName): \(Bundle.systemVersionBuild)\n")
 
         if let xcodeVersion {
             copyString.append("Xcode: \(xcodeVersion)")
         }
 
-        let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
-        pasteboard.setString(copyString, forType: .string)
+        pasteboardService.clear()
+        pasteboardService.setString(copyString)
     }
 
     var body: some View {
@@ -170,6 +163,7 @@ struct WelcomeView: View {
                 }
             }
             .onTapGesture {
+                // TODO: DOESNT WORK
                 copyInformation()
             }
             .help("Copy System Information to Clipboard")

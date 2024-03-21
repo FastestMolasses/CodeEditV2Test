@@ -10,7 +10,7 @@ struct Service<Service> {
 
     var service: Service
 
-    init(_ type: ServiceType = .automatic) {
+    init(_ type: ServiceType = .singleton) {
         guard let service = ServiceContainer.resolve(type, Service.self) else {
             let serviceName = String(describing: Service.self)
             fatalError("No service of type \(serviceName) registered!")

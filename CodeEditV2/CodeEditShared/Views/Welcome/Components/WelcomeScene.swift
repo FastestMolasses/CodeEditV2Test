@@ -1,15 +1,16 @@
 //
-//  WelcomeView.swift
-//  CodeEditV2
+//  WelcomeWindow.swift
+//  CodeEdit
 //
-//  Created by Abe Malla on 3/19/24.
+//  Created by Wouter Hennen on 13/03/2023.
 //
 
 import SwiftUI
 
 struct WelcomeScene: Scene {
 
-    @ObservedObject var settings = Settings.shared
+    // TODO: RE-ENABLE FOR WHEN SETTINGS IMPLEMENTED FOR IOS
+//    @ObservedObject var settings = Settings.shared
 
     var body: some Scene {
         #if os(macOS)
@@ -43,20 +44,20 @@ struct WelcomeScene: Scene {
         var body: some View {
             WelcomeWindowView { url, opened in
                 if let url {
-                    CodeEditDocumentController.shared.openDocument(withContentsOf: url, display: true) { doc, _, _ in
-                        if doc != nil {
-                            opened()
-                        }
-                    }
+//                    CodeEditDocumentController.shared.openDocument(withContentsOf: url, display: true) { doc, _, _ in
+//                        if doc != nil {
+//                            opened()
+//                        }
+//                    }
                 } else {
                     dismiss()
-                    CodeEditDocumentController.shared.openDocument(
-                        onCompletion: { _, _ in opened() },
-                        onCancel: { openWindow(sceneID: .welcome) }
-                    )
+//                    CodeEditDocumentController.shared.openDocument(
+//                        onCompletion: { _, _ in opened() },
+//                        onCancel: { openWindow(sceneID: .welcome) }
+//                    )
                 }
             } newDocument: {
-                CodeEditDocumentController.shared.newDocument(nil)
+//                CodeEditDocumentController.shared.newDocument(nil)
             } dismissWindow: {
                 dismiss()
             }
