@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RecentProjectsListView: View {
 
+    @Service private var pasteboardService: PasteboardService
+
     @State private var selection: Set<URL>
     @State var recentProjects: [URL]
 

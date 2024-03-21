@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WelcomeView2: Scene {
+struct WelcomeScene: Scene {
 
     @ObservedObject var settings = Settings.shared
 
