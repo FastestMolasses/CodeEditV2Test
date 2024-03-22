@@ -26,10 +26,9 @@ enum NSPasteboardProvider: PasteboardProvider {
     static func setString(_ string: String) {
         NSPasteboard.general.setString(string, forType: .string)
     }
-    
+
     @inline(__always)
     static func setStrings(_ strings: [String]) {
-        NSPasteboard.general.clearContents()
         NSPasteboard.general.writeObjects(strings as [NSString])
     }
 }

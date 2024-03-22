@@ -26,7 +26,7 @@ enum UIPasteboardProvider: PasteboardProvider {
     static func setString(_ string: String) {
         UIPasteboard.general.string = string
     }
-    
+
     @inline(__always)
     static func setStrings(_ strings: [String]) {
         UIPasteboard.general.strings = strings
