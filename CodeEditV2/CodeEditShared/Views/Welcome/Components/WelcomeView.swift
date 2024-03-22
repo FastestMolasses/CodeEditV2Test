@@ -6,21 +6,25 @@
 //
 
 import SwiftUI
-import AppKit
 import Foundation
+#if os(macOS)
+import AppKit
+#endif
 
 struct WelcomeView: View {
 
     @Service private var pasteboardService: PasteboardService
-    
+
     @Environment(\.colorScheme)
     var colorScheme
 
+    #if os(macOS)
     @Environment(\.controlActiveState)
     var controlActiveState
+    #endif
 
-    @AppSettings(\.general.reopenBehavior)
-    var reopenBehavior
+//    @AppSettings(\.general.reopenBehavior)
+//    var reopenBehavior
 
     @State var showGitClone = false
 
@@ -44,16 +48,8 @@ struct WelcomeView: View {
         self.dismissWindow = dismissWindow
     }
 
-    private var showWhenLaunchedBinding: Binding<Bool> {
-        Binding<Bool> {
-            reopenBehavior == .welcome
-        } set: { new in
-            reopenBehavior = new ? .welcome : .openPanel
-        }
-    }
-    
     private var appVersion: String {
-        Bundle.versionString ?? ""
+        Bundle.appVersion ?? ""
     }
 
     private var appBuild: String {
@@ -87,7 +83,6 @@ struct WelcomeView: View {
     /// Get program and operating system information
     private func copyInformation() {
         var copyString = "CodeEdit: \(appVersion)\(appVersionPostfix) (\(appBuild))\n"
-
         copyString.append("\(Bundle.systemName): \(Bundle.systemVersionBuild)\n")
 
         if let xcodeVersion {
@@ -95,7 +90,7 @@ struct WelcomeView: View {
         }
 
         pasteboardService.clear()
-        pasteboardService.setString(copyString)
+        pasteboardService.copy(copyString)
     }
 
     var body: some View {
@@ -106,24 +101,24 @@ struct WelcomeView: View {
         .onHover { isHovering in
             self.isHovering = isHovering
         }
-        .sheet(isPresented: $showGitClone) {
-            GitCloneView(
-                openBranchView: { url in
-                    showCheckoutBranchItem = url
-                },
-                openDocument: { url in
-                    openDocument(url, dismissWindow)
-                }
-            )
-        }
-        .sheet(item: $showCheckoutBranchItem, content: { repoPath in
-            GitCheckoutBranchView(
-                repoLocalPath: repoPath,
-                openDocument: { url in
-                    openDocument(url, dismissWindow)
-                }
-            )
-        })
+//        .sheet(isPresented: $showGitClone) {
+//            GitCloneView(
+//                openBranchView: { url in
+//                    showCheckoutBranchItem = url
+//                },
+//                openDocument: { url in
+//                    openDocument(url, dismissWindow)
+//                }
+//            )
+//        }
+//        .sheet(item: $showCheckoutBranchItem, content: { repoPath in
+//            GitCheckoutBranchView(
+//                repoLocalPath: repoPath,
+//                openDocument: { url in
+//                    openDocument(url, dismissWindow)
+//                }
+//            )
+//        })
     }
 
     private var mainContent: some View {
@@ -138,7 +133,10 @@ struct WelcomeView: View {
                         .blur(radius: 64)
                         .opacity(0.5)
                 }
-                Image(nsImage: NSApp.applicationIconImage)
+//                Image(nsImage: NSApp.applicationIconImage)
+//                    .resizable()
+//                    .frame(width: 128, height: 128)
+                Image("AppIcon")
                     .resizable()
                     .frame(width: 128, height: 128)
             }
@@ -155,6 +153,7 @@ struct WelcomeView: View {
             .textSelection(.enabled)
             .foregroundColor(.secondary)
             .font(.system(size: 13.5))
+            #if os(macOS)
             .onHover { hover in
                 if hover {
                     NSCursor.pointingHand.push()
@@ -162,6 +161,7 @@ struct WelcomeView: View {
                     NSCursor.pop()
                 }
             }
+            #endif
             .onTapGesture {
                 // TODO: DOESNT WORK
                 copyInformation()
@@ -171,6 +171,10 @@ struct WelcomeView: View {
             Spacer().frame(height: 40)
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
+                    // TODO: IOS OPTIONS:
+                    // 1. CREATE LOCAL PROJECT
+                    // 2. CLONE GIT REPOSITORY
+                    // 3. OPEN FILE OR FOLDER
                     WelcomeActionView(
                         iconName: "plus.square",
                         title: NSLocalizedString("Create New File...", comment: ""),
@@ -201,11 +205,19 @@ struct WelcomeView: View {
         .padding(.horizontal, 56)
         .padding(.bottom, 16)
         .frame(width: 460)
+        #if os(macOS)
         .background(
             colorScheme == .dark
             ? Color(.black).opacity(0.2)
             : Color(.white).opacity(controlActiveState == .inactive ? 1.0 : 0.5)
         )
+        #else
+        .background(
+            colorScheme == .dark
+            ? Color(.black).opacity(0.2)
+            : Color(.white).opacity(0.5)
+        )
+        #endif
         .background(EffectView(.underWindowBackground, blendingMode: .behindWindow))
     }
 
@@ -214,7 +226,11 @@ struct WelcomeView: View {
             action: dismissWindow,
             label: {
                 Image(systemName: "xmark.circle.fill")
+                #if os(macOS)
                     .foregroundColor(isHoveringCloseButton ? Color(.secondaryLabelColor) : Color(.tertiaryLabelColor))
+                #else
+                    .foregroundColor(isHoveringCloseButton ? Color(.secondaryLabel) : Color(.tertiaryLabel))
+                #endif
             }
         )
         .buttonStyle(.plain)

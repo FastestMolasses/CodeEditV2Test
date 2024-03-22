@@ -1,77 +1,109 @@
-//
-//  EffectView.swift
-//  CodeEditV2
-//
-//  Created by Abe Malla on 3/21/24.
-//
-
 import SwiftUI
 
 #if os(macOS)
-/// A SwiftUI Wrapper for `NSVisualEffectView`
-///
-/// ## Usage
-/// ```swift
-/// EffectView(material: .headerView, blendingMode: .withinWindow)
-/// ```
-struct EffectView: NSViewRepresentable {
-    private let material: NSVisualEffectView.Material
-    private let blendingMode: NSVisualEffectView.BlendingMode
+import AppKit
+#elseif os(iOS)
+import UIKit
+#endif
+
+struct EffectView: View {
+    private let material: Material
+    private let blendingMode: BlendingMode
     private let emphasized: Bool
-    
-    /// Initializes the
-    /// [`NSVisualEffectView`](https://developer.apple.com/documentation/appkit/nsvisualeffectview)
-    /// with a
-    /// [`Material`](https://developer.apple.com/documentation/appkit/nsvisualeffectview/material) and
-    /// [`BlendingMode`](https://developer.apple.com/documentation/appkit/nsvisualeffectview/blendingmode)
-    ///
-    /// By setting the
-    /// [`emphasized`](https://developer.apple.com/documentation/appkit/nsvisualeffectview/1644721-isemphasized)
-    /// flag the emphasized state of the material will be used if available.
-    ///
-    /// - Parameters:
-    ///   - material: The material to use. Defaults to `.headerView`.
-    ///   - blendingMode: The blending mode to use. Defaults to `.withinWindow`.
-    ///   - emphasized:A Boolean value indicating whether to emphasize the look of the material. Defaults to `false`.
+
     init(
-        _ material: NSVisualEffectView.Material = .headerView,
-        blendingMode: NSVisualEffectView.BlendingMode = .withinWindow,
+        _ material: Material = .headerView,
+        blendingMode: BlendingMode = .withinWindow,
         emphasized: Bool = false
     ) {
         self.material = material
         self.blendingMode = blendingMode
         self.emphasized = emphasized
     }
-    
-    func makeNSView(context: Context) -> NSVisualEffectView {
-        let view = NSVisualEffectView()
-        view.material = material
-        view.blendingMode = blendingMode
-        view.isEmphasized = emphasized
-        view.state = .followsWindowActiveState
-        return view
+
+    var body: some View {
+        #if os(macOS)
+        NSViewEffectWrapper(material: material.nsMaterial, blendingMode: blendingMode.nsBlendingMode, emphasized: emphasized)
+        #elseif os(iOS)
+        UIViewEffectWrapper(style: material.uiBlurEffectStyle, emphasized: emphasized)
+        #endif
     }
-    
-    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
-        nsView.material = material
-        nsView.blendingMode = blendingMode
+
+    // Mapping enum for multiplatform support
+    enum Material {
+        case headerView, selection, underWindowBackground
+        
+        #if os(macOS)
+        var nsMaterial: NSVisualEffectView.Material {
+            switch self {
+            case .headerView: return .headerView
+            case .selection: return .selection
+            case .underWindowBackground: return .underWindowBackground
+            }
+        }
+        #elseif os(iOS)
+        var uiBlurEffectStyle: UIBlurEffect.Style {
+            switch self {
+            case .headerView, .underWindowBackground: return .systemMaterial
+            case .selection: return .dark // TODO: Example mapping, adjust as needed
+            }
+        }
+        #endif
     }
+
+    enum BlendingMode {
+        case withinWindow, behindWindow
+
+        #if os(macOS)
+        var nsBlendingMode: NSVisualEffectView.BlendingMode {
+            // macOS specific mapping
+            switch self {
+            case .withinWindow: return .withinWindow
+            case .behindWindow: return .behindWindow
+            }
+        }
+        #endif
+    }
+
+    #if os(macOS)
+    // macOS specific wrapper
+    struct NSViewEffectWrapper: NSViewRepresentable {
+        var material: NSVisualEffectView.Material
+        var blendingMode: NSVisualEffectView.BlendingMode
+        var emphasized: Bool
+
+        func makeNSView(context: Context) -> NSVisualEffectView {
+            let view = NSVisualEffectView()
+            view.material = material
+            view.blendingMode = blendingMode
+            view.isEmphasized = emphasized
+            view.state = .followsWindowActiveState
+            return view
+        }
+
+        func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+            nsView.material = material
+            nsView.blendingMode = blendingMode
+            nsView.isEmphasized = emphasized
+        }
+    }
+    #elseif os(iOS)
+    // iOS specific wrapper
+    struct UIViewEffectWrapper: UIViewRepresentable {
+        var style: UIBlurEffect.Style
+        var emphasized: Bool // This might be used to adjust the effect based on context
+        
+        func makeUIView(context: Context) -> UIVisualEffectView {
+            let effect = UIBlurEffect(style: style)
+            return UIVisualEffectView(effect: effect)
+        }
+
+        func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+            uiView.effect = UIBlurEffect(style: style)
+        }
+    }
+    #endif
 }
-#elseif os(iOS)
-import UIKit
-
-struct EffectView: UIViewRepresentable {
-    var effect: UIVisualEffect?
-
-    func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: effect)
-    }
-
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        uiView.effect = effect
-    }
-}
-#endif
 
 extension EffectView {
     /// Returns the system selection style as an ``EffectView`` if the `condition` is met.

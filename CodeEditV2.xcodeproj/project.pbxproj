@@ -23,6 +23,13 @@
 		3013D4012BAC7E73009E2EC0 /* Bundle+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D4002BAC7E73009E2EC0 /* Bundle+Info.swift */; };
 		3013D4042BACA224009E2EC0 /* NSApp+openWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D4032BACA224009E2EC0 /* NSApp+openWindow.swift */; };
 		3013D4072BACA3B7009E2EC0 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D4062BACA3B7009E2EC0 /* EffectView.swift */; };
+		3013D4092BACAA25009E2EC0 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D4082BACAA25009E2EC0 /* WelcomeView.swift */; };
+		3013D40C2BACB0A7009E2EC0 /* DocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D40B2BACB0A7009E2EC0 /* DocumentService.swift */; };
+		3013D4132BACF361009E2EC0 /* Alpha.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3013D40D2BACF361009E2EC0 /* Alpha.xcconfig */; };
+		3013D4142BACF361009E2EC0 /* Beta.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3013D40E2BACF361009E2EC0 /* Beta.xcconfig */; };
+		3013D4152BACF361009E2EC0 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3013D40F2BACF361009E2EC0 /* Debug.xcconfig */; };
+		3013D4162BACF361009E2EC0 /* Pre.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3013D4102BACF361009E2EC0 /* Pre.xcconfig */; };
+		3013D4172BACF361009E2EC0 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3013D4112BACF361009E2EC0 /* Release.xcconfig */; };
 		30FE9B8A2BAA74A00010FF65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FE9B892BAA74A00010FF65 /* Assets.xcassets */; };
 		30FE9B8E2BAA74A00010FF65 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FE9B8D2BAA74A00010FF65 /* Preview Assets.xcassets */; };
 		30FE9B972BAA75190010FF65 /* RecentProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE9B962BAA75190010FF65 /* RecentProject.swift */; };
@@ -35,7 +42,6 @@
 		3013D3DD2BAA9AFD009E2EC0 /* WelcomeWindowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWindowView.swift; sourceTree = "<group>"; };
 		3013D3DE2BAA9AFD009E2EC0 /* WelcomeActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeActionView.swift; sourceTree = "<group>"; };
 		3013D3DF2BAA9AFD009E2EC0 /* RecentProjectItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentProjectItem.swift; sourceTree = "<group>"; };
-		3013D3E72BAA9C11009E2EC0 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		3013D3E82BAA9D7F009E2EC0 /* SceneID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneID.swift; sourceTree = "<group>"; };
 		3013D3EB2BABAE56009E2EC0 /* PasteboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardService.swift; sourceTree = "<group>"; };
 		3013D3EE2BABB16C009E2EC0 /* UIPasteboardProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPasteboardProvider.swift; sourceTree = "<group>"; };
@@ -47,6 +53,13 @@
 		3013D4002BAC7E73009E2EC0 /* Bundle+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Info.swift"; sourceTree = "<group>"; };
 		3013D4032BACA224009E2EC0 /* NSApp+openWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApp+openWindow.swift"; sourceTree = "<group>"; };
 		3013D4062BACA3B7009E2EC0 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
+		3013D4082BACAA25009E2EC0 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		3013D40B2BACB0A7009E2EC0 /* DocumentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentService.swift; sourceTree = "<group>"; };
+		3013D40D2BACF361009E2EC0 /* Alpha.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
+		3013D40E2BACF361009E2EC0 /* Beta.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
+		3013D40F2BACF361009E2EC0 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		3013D4102BACF361009E2EC0 /* Pre.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Pre.xcconfig; sourceTree = "<group>"; };
+		3013D4112BACF361009E2EC0 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		30FE9B822BAA749F0010FF65 /* CodeEditV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeEditV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FE9B892BAA74A00010FF65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30FE9B8B2BAA74A00010FF65 /* CodeEditV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeEditV2.entitlements; sourceTree = "<group>"; };
@@ -95,9 +108,9 @@
 				3013D3DF2BAA9AFD009E2EC0 /* RecentProjectItem.swift */,
 				3013D3DA2BAA9AFC009E2EC0 /* RecentProjectsListView.swift */,
 				3013D3DE2BAA9AFD009E2EC0 /* WelcomeActionView.swift */,
-				3013D3E72BAA9C11009E2EC0 /* WelcomeView.swift */,
 				3013D3DC2BAA9AFD009E2EC0 /* WelcomeScene.swift */,
 				3013D3DD2BAA9AFD009E2EC0 /* WelcomeWindowView.swift */,
+				3013D4082BACAA25009E2EC0 /* WelcomeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -106,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				3013D3F22BABBE2F009E2EC0 /* DependencyInjection */,
+				3013D40A2BACB08E009E2EC0 /* DocumentService */,
 				3013D3ED2BABB153009E2EC0 /* PasteboardService */,
 			);
 			path = Services;
@@ -164,6 +178,26 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		3013D40A2BACB08E009E2EC0 /* DocumentService */ = {
+			isa = PBXGroup;
+			children = (
+				3013D40B2BACB0A7009E2EC0 /* DocumentService.swift */,
+			);
+			path = DocumentService;
+			sourceTree = "<group>";
+		};
+		3013D4122BACF361009E2EC0 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				3013D40D2BACF361009E2EC0 /* Alpha.xcconfig */,
+				3013D40E2BACF361009E2EC0 /* Beta.xcconfig */,
+				3013D40F2BACF361009E2EC0 /* Debug.xcconfig */,
+				3013D4102BACF361009E2EC0 /* Pre.xcconfig */,
+				3013D4112BACF361009E2EC0 /* Release.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		30FE9B792BAA749F0010FF65 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +224,7 @@
 				3013D3F92BABBF03009E2EC0 /* App.swift */,
 				30FE9B892BAA74A00010FF65 /* Assets.xcassets */,
 				30FE9B8B2BAA74A00010FF65 /* CodeEditV2.entitlements */,
+				3013D4122BACF361009E2EC0 /* Configs */,
 				30FE9B8C2BAA74A00010FF65 /* Preview Content */,
 			);
 			path = CodeEditV2;
@@ -323,7 +358,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3013D4142BACF361009E2EC0 /* Beta.xcconfig in Resources */,
+				3013D4132BACF361009E2EC0 /* Alpha.xcconfig in Resources */,
 				30FE9B8E2BAA74A00010FF65 /* Preview Assets.xcassets in Resources */,
+				3013D4152BACF361009E2EC0 /* Debug.xcconfig in Resources */,
+				3013D4162BACF361009E2EC0 /* Pre.xcconfig in Resources */,
+				3013D4172BACF361009E2EC0 /* Release.xcconfig in Resources */,
 				30FE9B8A2BAA74A00010FF65 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +383,7 @@
 				3013D3E52BAA9AFD009E2EC0 /* RecentProjectItem.swift in Sources */,
 				3013D3F62BABBE5E009E2EC0 /* ServiceContainer.swift in Sources */,
 				3013D3E22BAA9AFD009E2EC0 /* WelcomeScene.swift in Sources */,
+				3013D40C2BACB0A7009E2EC0 /* DocumentService.swift in Sources */,
 				3013D3E02BAA9AFD009E2EC0 /* RecentProjectsListView.swift in Sources */,
 				3013D4072BACA3B7009E2EC0 /* EffectView.swift in Sources */,
 				3013D3E32BAA9AFD009E2EC0 /* WelcomeWindowView.swift in Sources */,
@@ -353,6 +394,7 @@
 				3013D4042BACA224009E2EC0 /* NSApp+openWindow.swift in Sources */,
 				3013D3F42BABBE3F009E2EC0 /* ServiceTypes.swift in Sources */,
 				3013D3F82BABBEAB009E2EC0 /* ServiceWrapper.swift in Sources */,
+				3013D4092BACAA25009E2EC0 /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,10 +520,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CodeEditV2/CodeEditV2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CodeEditV2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "CodeEditV2/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2G85LYN9NT;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -516,10 +559,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CodeEditV2/CodeEditV2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CodeEditV2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "CodeEditV2/Preview\\ Content";
 				DEVELOPMENT_TEAM = 2G85LYN9NT;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
