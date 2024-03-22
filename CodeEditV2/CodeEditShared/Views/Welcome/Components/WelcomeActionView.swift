@@ -39,11 +39,14 @@ struct WelcomeActionButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .contentShape(Rectangle())
-            .padding(7)
-            .frame(height: 36)
             #if os(iOS)
+            .padding(14)
+            .frame(height: 48)
+            .frame(maxWidth: 348)
             .background(Color(UIColor.label).opacity(configuration.isPressed ? 0.1 : 0.05))
             #elseif os(macOS)
+            .padding(7)
+            .frame(height: 36)
             .background(Color(NSColor.labelColor).opacity(configuration.isPressed ? 0.1 : 0.05))
             #endif
             .cornerRadius(8)

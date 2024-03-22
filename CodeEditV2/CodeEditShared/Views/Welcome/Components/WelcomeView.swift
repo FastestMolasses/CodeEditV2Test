@@ -133,12 +133,15 @@ struct WelcomeView: View {
                         .blur(radius: 64)
                         .opacity(0.5)
                 }
-//                Image(nsImage: NSApp.applicationIconImage)
-//                    .resizable()
-//                    .frame(width: 128, height: 128)
+                #if os(macOS)
+                Image(nsImage: NSApp.applicationIconImage)
+                    .resizable()
+                    .frame(width: 128, height: 128)
+                #else
                 Image("AppIcon")
                     .resizable()
                     .frame(width: 128, height: 128)
+                #endif
             }
             Text(NSLocalizedString("CodeEdit", comment: ""))
                 .font(.system(size: 36, weight: .bold))
@@ -198,14 +201,15 @@ struct WelcomeView: View {
                         }
                     )
                 }
+                .frame(maxWidth: .infinity)
             }
             Spacer()
         }
         .padding(.top, 20)
         .padding(.horizontal, 56)
         .padding(.bottom, 16)
-        .frame(width: 460)
         #if os(macOS)
+        .frame(width: 460)
         .background(
             colorScheme == .dark
             ? Color(.black).opacity(0.2)
@@ -222,15 +226,12 @@ struct WelcomeView: View {
     }
 
     private var dismissButton: some View {
+        #if os(macOS)
         Button(
             action: dismissWindow,
             label: {
                 Image(systemName: "xmark.circle.fill")
-                #if os(macOS)
                     .foregroundColor(isHoveringCloseButton ? Color(.secondaryLabelColor) : Color(.tertiaryLabelColor))
-                #else
-                    .foregroundColor(isHoveringCloseButton ? Color(.secondaryLabel) : Color(.tertiaryLabel))
-                #endif
             }
         )
         .buttonStyle(.plain)
@@ -242,5 +243,8 @@ struct WelcomeView: View {
         }
         .padding(10)
         .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.25)))
+        #elseif os(iOS)
+        return EmptyView()
+        #endif
     }
 }
