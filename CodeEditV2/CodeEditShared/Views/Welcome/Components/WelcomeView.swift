@@ -12,32 +12,32 @@ import AppKit
 #endif
 
 struct WelcomeView: View {
-
+    
     @Service private var pasteboardService: PasteboardService
-
+    
     @Environment(\.colorScheme)
     var colorScheme
-
-    #if os(macOS)
+    
+#if os(macOS)
     @Environment(\.controlActiveState)
     var controlActiveState
-    #endif
-
-//    @AppSettings(\.general.reopenBehavior)
-//    var reopenBehavior
-
+#endif
+    
+    //    @AppSettings(\.general.reopenBehavior)
+    //    var reopenBehavior
+    
     @State var showGitClone = false
-
+    
     @State var showCheckoutBranchItem: URL?
-
+    
     @State var isHovering: Bool = false
-
+    
     @State var isHoveringCloseButton: Bool = false
-
+    
     private let openDocument: (URL?, @escaping () -> Void) -> Void
     private let newDocument: () -> Void
     private let dismissWindow: () -> Void
-
+    
     init(
         openDocument: @escaping (URL?, @escaping () -> Void) -> Void,
         newDocument: @escaping () -> Void,
@@ -47,22 +47,22 @@ struct WelcomeView: View {
         self.newDocument = newDocument
         self.dismissWindow = dismissWindow
     }
-
+    
     private var appVersion: String {
         Bundle.appVersion ?? ""
     }
-
+    
     private var appBuild: String {
         Bundle.buildString ?? ""
     }
-
+    
     private var appVersionPostfix: String {
         Bundle.versionPostfix ?? ""
     }
-
+    
     /// Return the Xcode version and build (if installed)
     private var xcodeVersion: String? {
-        #if os(macOS)
+#if os(macOS)
         guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.dt.Xcode"),
               let bundle = Bundle(url: url),
               let infoDict = bundle.infoDictionary,
@@ -73,26 +73,26 @@ struct WelcomeView: View {
         else {
             return nil
         }
-
+        
         return "\(version) (\(build))"
-        #else
+#else
         return nil
-        #endif
+#endif
     }
-
+    
     /// Get program and operating system information
     private func copyInformation() {
         var copyString = "CodeEdit: \(appVersion)\(appVersionPostfix) (\(appBuild))\n"
         copyString.append("\(Bundle.systemName): \(Bundle.systemVersionBuild)\n")
-
+        
         if let xcodeVersion {
             copyString.append("Xcode: \(xcodeVersion)")
         }
-
+        
         pasteboardService.clear()
         pasteboardService.copy(copyString)
     }
-
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             mainContent
@@ -101,26 +101,26 @@ struct WelcomeView: View {
         .onHover { isHovering in
             self.isHovering = isHovering
         }
-//        .sheet(isPresented: $showGitClone) {
-//            GitCloneView(
-//                openBranchView: { url in
-//                    showCheckoutBranchItem = url
-//                },
-//                openDocument: { url in
-//                    openDocument(url, dismissWindow)
-//                }
-//            )
-//        }
-//        .sheet(item: $showCheckoutBranchItem, content: { repoPath in
-//            GitCheckoutBranchView(
-//                repoLocalPath: repoPath,
-//                openDocument: { url in
-//                    openDocument(url, dismissWindow)
-//                }
-//            )
-//        })
+        //        .sheet(isPresented: $showGitClone) {
+        //            GitCloneView(
+        //                openBranchView: { url in
+        //                    showCheckoutBranchItem = url
+        //                },
+        //                openDocument: { url in
+        //                    openDocument(url, dismissWindow)
+        //                }
+        //            )
+        //        }
+        //        .sheet(item: $showCheckoutBranchItem, content: { repoPath in
+        //            GitCheckoutBranchView(
+        //                repoLocalPath: repoPath,
+        //                openDocument: { url in
+        //                    openDocument(url, dismissWindow)
+        //                }
+        //            )
+        //        })
     }
-
+    
     private var mainContent: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 32)
@@ -133,15 +133,15 @@ struct WelcomeView: View {
                         .blur(radius: 64)
                         .opacity(0.5)
                 }
-                #if os(macOS)
+#if os(macOS)
                 Image(nsImage: NSApp.applicationIconImage)
                     .resizable()
                     .frame(width: 128, height: 128)
-                #else
+#else
                 Image("AppIcon")
                     .resizable()
                     .frame(width: 128, height: 128)
-                #endif
+#endif
             }
             Text(NSLocalizedString("CodeEdit", comment: ""))
                 .font(.system(size: 36, weight: .bold))
@@ -156,7 +156,7 @@ struct WelcomeView: View {
             .textSelection(.enabled)
             .foregroundColor(.secondary)
             .font(.system(size: 13.5))
-            #if os(macOS)
+#if os(macOS)
             .onHover { hover in
                 if hover {
                     NSCursor.pointingHand.push()
@@ -164,13 +164,13 @@ struct WelcomeView: View {
                     NSCursor.pop()
                 }
             }
-            #endif
+#endif
             .onTapGesture {
                 // TODO: DOESNT WORK
                 copyInformation()
             }
             .help("Copy System Information to Clipboard")
-
+            
             Spacer().frame(height: 40)
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
@@ -208,25 +208,25 @@ struct WelcomeView: View {
         .padding(.top, 20)
         .padding(.horizontal, 56)
         .padding(.bottom, 16)
-        #if os(macOS)
+#if os(macOS)
         .frame(width: 460)
         .background(
             colorScheme == .dark
             ? Color(.black).opacity(0.2)
             : Color(.white).opacity(controlActiveState == .inactive ? 1.0 : 0.5)
         )
-        #else
+#else
         .background(
             colorScheme == .dark
             ? Color(.black).opacity(0.2)
             : Color(.white).opacity(0.5)
         )
-        #endif
+#endif
         .background(EffectView(.underWindowBackground, blendingMode: .behindWindow))
     }
-
+    
     private var dismissButton: some View {
-        #if os(macOS)
+#if os(macOS)
         Button(
             action: dismissWindow,
             label: {
@@ -243,8 +243,8 @@ struct WelcomeView: View {
         }
         .padding(10)
         .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.25)))
-        #elseif os(iOS)
+#elseif os(iOS)
         return EmptyView()
-        #endif
+#endif
     }
 }
