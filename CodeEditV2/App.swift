@@ -21,8 +21,10 @@ struct CodeEdit: App {
 private extension CodeEdit {
     func setupServiceContainer() {
         ServiceContainer.register(
-            type: PasteboardService.self,
             PasteboardService()
+        )
+        ServiceContainer.register(
+            DocumentService()
         )
     }
 }

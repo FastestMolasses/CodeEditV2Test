@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300051742BC2977800A98562 /* NSDocumentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300051732BC2977800A98562 /* NSDocumentProvider.swift */; };
+		300051762BC2978300A98562 /* UIDocumentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300051752BC2978300A98562 /* UIDocumentProvider.swift */; };
+		300051792BC2CF7400A98562 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300051782BC2CF7400A98562 /* TextModel.swift */; };
+		3000517C2BC2CFA100A98562 /* TextModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3000517B2BC2CFA100A98562 /* TextModelService.swift */; };
 		3013D3E02BAA9AFD009E2EC0 /* RecentProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D3DA2BAA9AFC009E2EC0 /* RecentProjectsListView.swift */; };
 		3013D3E22BAA9AFD009E2EC0 /* WelcomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D3DC2BAA9AFD009E2EC0 /* WelcomeScene.swift */; };
 		3013D3E32BAA9AFD009E2EC0 /* WelcomeWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3013D3DD2BAA9AFD009E2EC0 /* WelcomeWindowView.swift */; };
@@ -37,6 +41,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		300051732BC2977800A98562 /* NSDocumentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDocumentProvider.swift; sourceTree = "<group>"; };
+		300051752BC2978300A98562 /* UIDocumentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDocumentProvider.swift; sourceTree = "<group>"; };
+		300051782BC2CF7400A98562 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
+		3000517B2BC2CFA100A98562 /* TextModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModelService.swift; sourceTree = "<group>"; };
 		3013D3DA2BAA9AFC009E2EC0 /* RecentProjectsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentProjectsListView.swift; sourceTree = "<group>"; };
 		3013D3DC2BAA9AFD009E2EC0 /* WelcomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScene.swift; sourceTree = "<group>"; };
 		3013D3DD2BAA9AFD009E2EC0 /* WelcomeWindowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWindowView.swift; sourceTree = "<group>"; };
@@ -79,6 +87,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300051772BC2C78600A98562 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+		3000517A2BC2CF8100A98562 /* TextModelService */ = {
+			isa = PBXGroup;
+			children = (
+				3000517B2BC2CFA100A98562 /* TextModelService.swift */,
+			);
+			path = TextModelService;
+			sourceTree = "<group>";
+		};
 		3013D3D52BAA8732009E2EC0 /* Web */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				3013D3E62BAA9C08009E2EC0 /* Components */,
+				3013D3DC2BAA9AFD009E2EC0 /* WelcomeScene.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -108,9 +132,8 @@
 				3013D3DF2BAA9AFD009E2EC0 /* RecentProjectItem.swift */,
 				3013D3DA2BAA9AFC009E2EC0 /* RecentProjectsListView.swift */,
 				3013D3DE2BAA9AFD009E2EC0 /* WelcomeActionView.swift */,
-				3013D3DC2BAA9AFD009E2EC0 /* WelcomeScene.swift */,
-				3013D3DD2BAA9AFD009E2EC0 /* WelcomeWindowView.swift */,
 				3013D4082BACAA25009E2EC0 /* WelcomeView.swift */,
+				3013D3DD2BAA9AFD009E2EC0 /* WelcomeWindowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -118,6 +141,7 @@
 		3013D3EA2BABAE3A009E2EC0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3000517A2BC2CF8100A98562 /* TextModelService */,
 				3013D3F22BABBE2F009E2EC0 /* DependencyInjection */,
 				3013D40A2BACB08E009E2EC0 /* DocumentService */,
 				3013D3ED2BABB153009E2EC0 /* PasteboardService */,
@@ -129,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				3013D3EB2BABAE56009E2EC0 /* PasteboardService.swift */,
-				3013D3EE2BABB16C009E2EC0 /* UIPasteboardProvider.swift */,
 				3013D3F02BABB27E009E2EC0 /* NSPasteboardProvider.swift */,
+				3013D3EE2BABB16C009E2EC0 /* UIPasteboardProvider.swift */,
 			);
 			path = PasteboardService;
 			sourceTree = "<group>";
@@ -138,8 +162,8 @@
 		3013D3F22BABBE2F009E2EC0 /* DependencyInjection */ = {
 			isa = PBXGroup;
 			children = (
-				3013D3F32BABBE3F009E2EC0 /* ServiceTypes.swift */,
 				3013D3F52BABBE5E009E2EC0 /* ServiceContainer.swift */,
+				3013D3F32BABBE3F009E2EC0 /* ServiceTypes.swift */,
 				3013D3F72BABBEAB009E2EC0 /* ServiceWrapper.swift */,
 			);
 			path = DependencyInjection;
@@ -182,6 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				3013D40B2BACB0A7009E2EC0 /* DocumentService.swift */,
+				300051732BC2977800A98562 /* NSDocumentProvider.swift */,
+				300051752BC2978300A98562 /* UIDocumentProvider.swift */,
 			);
 			path = DocumentService;
 			sourceTree = "<group>";
@@ -253,7 +279,9 @@
 		30FE9B952BAA75010010FF65 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				300051772BC2C78600A98562 /* Documents */,
 				30FE9B962BAA75190010FF65 /* RecentProject.swift */,
+				300051782BC2CF7400A98562 /* TextModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -379,20 +407,24 @@
 				3013D3EC2BABAE56009E2EC0 /* PasteboardService.swift in Sources */,
 				3013D3E42BAA9AFD009E2EC0 /* WelcomeActionView.swift in Sources */,
 				3013D3F12BABB27E009E2EC0 /* NSPasteboardProvider.swift in Sources */,
+				300051742BC2977800A98562 /* NSDocumentProvider.swift in Sources */,
 				3013D3EF2BABB16C009E2EC0 /* UIPasteboardProvider.swift in Sources */,
 				3013D3E52BAA9AFD009E2EC0 /* RecentProjectItem.swift in Sources */,
 				3013D3F62BABBE5E009E2EC0 /* ServiceContainer.swift in Sources */,
+				3000517C2BC2CFA100A98562 /* TextModelService.swift in Sources */,
 				3013D3E22BAA9AFD009E2EC0 /* WelcomeScene.swift in Sources */,
 				3013D40C2BACB0A7009E2EC0 /* DocumentService.swift in Sources */,
 				3013D3E02BAA9AFD009E2EC0 /* RecentProjectsListView.swift in Sources */,
 				3013D4072BACA3B7009E2EC0 /* EffectView.swift in Sources */,
 				3013D3E32BAA9AFD009E2EC0 /* WelcomeWindowView.swift in Sources */,
+				300051762BC2978300A98562 /* UIDocumentProvider.swift in Sources */,
 				3013D3FA2BABBF03009E2EC0 /* App.swift in Sources */,
 				3013D3E92BAA9D7F009E2EC0 /* SceneID.swift in Sources */,
 				30FE9B9A2BAA75330010FF65 /* ProjectManager.swift in Sources */,
 				30FE9B972BAA75190010FF65 /* RecentProject.swift in Sources */,
 				3013D4042BACA224009E2EC0 /* NSApp+openWindow.swift in Sources */,
 				3013D3F42BABBE3F009E2EC0 /* ServiceTypes.swift in Sources */,
+				300051792BC2CF7400A98562 /* TextModel.swift in Sources */,
 				3013D3F82BABBEAB009E2EC0 /* ServiceWrapper.swift in Sources */,
 				3013D4092BACAA25009E2EC0 /* WelcomeView.swift in Sources */,
 			);
@@ -453,6 +485,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSFileProviderPresenceUsageDescription = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -508,6 +544,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
