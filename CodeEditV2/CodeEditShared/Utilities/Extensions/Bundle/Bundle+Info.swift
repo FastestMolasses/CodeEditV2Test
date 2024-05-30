@@ -15,10 +15,10 @@ extension Bundle {
 
     /// Returns the version and build of the platform
     static var systemVersionBuild: String {
-        #if os(iOS)
+#if os(iOS)
         // Example output: "17.0"
         return UIDevice.current.systemVersion
-        #elseif os(macOS)
+#elseif os(macOS)
         let url = URL(fileURLWithPath: "/System/Library/CoreServices/SystemVersion.plist")
         guard let dict = NSDictionary(contentsOf: url),
               let version = dict["ProductUserVisibleVersion"],
@@ -27,10 +27,10 @@ extension Bundle {
         }
         // Example output: "14.4 (23E214)""
         return "\(version) (\(build))"
-        #else
+#else
         // Example output: "Version 14.4 (Build 23E214)""
         return ProcessInfo.processInfo.operatingSystemVersionString
-        #endif
+#endif
     }
 
     /// Returns the version of the system, including the patch version (e.g. 14.4.0)
@@ -41,24 +41,24 @@ extension Bundle {
 
     /// Returns the name of the operating system (e.g. iOS, macOS, Web)
     static var systemName: String {
-        #if os(iOS)
+#if os(iOS)
         return UIDevice.current.systemName
-        #elseif os(macOS)
+#elseif os(macOS)
         return "macOS"
-        #elseif os(WASI)
+#elseif os(WASI)
         return "Web"
-        #endif
+#endif
     }
 
     /// Returns the platform name (e.g. iPhone, iPad, Mac)
     static var deviceName: String {
-        #if os(iOS)
+#if os(iOS)
         return UIDevice.current.model
-        #elseif os(macOS)
+#elseif os(macOS)
         return "Mac"
-        #elseif os(WASI)
+#elseif os(WASI)
         return "Web"
-        #endif
+#endif
     }
 
     /// Returns the main bundle's name if available (e.g. CodeEdit)

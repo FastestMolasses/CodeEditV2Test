@@ -12,9 +12,7 @@ import AppKit
 #endif
 
 struct WelcomeView: View {
-    
-    @Service private var pasteboardService: PasteboardService
-    
+
     @Environment(\.colorScheme)
     var colorScheme
     
@@ -34,6 +32,10 @@ struct WelcomeView: View {
     
     @State var isHoveringCloseButton: Bool = false
     
+#if os(iOS)
+    @State private var showAboutWindow = false
+#endif
+    
     private let openDocument: (URL?, @escaping () -> Void) -> Void
     private let newDocument: () -> Void
     private let dismissWindow: () -> Void
@@ -46,51 +48,6 @@ struct WelcomeView: View {
         self.openDocument = openDocument
         self.newDocument = newDocument
         self.dismissWindow = dismissWindow
-    }
-    
-    private var appVersion: String {
-        Bundle.appVersion ?? ""
-    }
-    
-    private var appBuild: String {
-        Bundle.buildString ?? ""
-    }
-    
-    private var appVersionPostfix: String {
-        Bundle.versionPostfix ?? ""
-    }
-    
-    /// Return the Xcode version and build (if installed)
-    private var xcodeVersion: String? {
-#if os(macOS)
-        guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.dt.Xcode"),
-              let bundle = Bundle(url: url),
-              let infoDict = bundle.infoDictionary,
-              let version = infoDict["CFBundleShortVersionString"] as? String,
-              let buildURL = URL(string: "\(url)Contents/version.plist"),
-              let buildDict = try? NSDictionary(contentsOf: buildURL, error: ()),
-              let build = buildDict["ProductBuildVersion"]
-        else {
-            return nil
-        }
-        
-        return "\(version) (\(build))"
-#else
-        return nil
-#endif
-    }
-    
-    /// Get program and operating system information
-    private func copyInformation() {
-        var copyString = "CodeEdit: \(appVersion)\(appVersionPostfix) (\(appBuild))\n"
-        copyString.append("\(Bundle.systemName): \(Bundle.systemVersionBuild)\n")
-        
-        if let xcodeVersion {
-            copyString.append("Xcode: \(xcodeVersion)")
-        }
-        
-        pasteboardService.clear()
-        pasteboardService.copy(copyString)
     }
     
     var body: some View {
@@ -141,6 +98,9 @@ struct WelcomeView: View {
                 Image("AppIcon")
                     .resizable()
                     .frame(width: 128, height: 128)
+                    .onTapGesture {
+                        self.showAboutWindow = true
+                    }
 #endif
             }
             Text(NSLocalizedString("CodeEdit", comment: ""))
@@ -148,9 +108,9 @@ struct WelcomeView: View {
             Text(
                 String(
                     format: NSLocalizedString("Version %@%@ (%@)", comment: ""),
-                    appVersion,
-                    appVersionPostfix,
-                    appBuild
+                    PlatformService.appVersion,
+                    PlatformService.appVersionPostfix,
+                    PlatformService.appBuild
                 )
             )
             .textSelection(.enabled)
@@ -164,13 +124,20 @@ struct WelcomeView: View {
                     NSCursor.pop()
                 }
             }
+#elseif os(iOS)
+//            .sheet(isPresented: $showAboutWindow) {
+//                    AboutView()
+//            }
+            .sheet(isPresented: $showAboutWindow) {
+                SettingsView(updater: SoftwareUpdater())
+            }
 #endif
             .onTapGesture {
                 // TODO: DOESNT WORK
-                copyInformation()
+                PlatformService.copyInformation()
             }
             .help("Copy System Information to Clipboard")
-            
+
             Spacer().frame(height: 40)
             HStack {
                 VStack(alignment: .leading, spacing: 8) {

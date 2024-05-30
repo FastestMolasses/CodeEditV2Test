@@ -14,7 +14,17 @@ struct CodeEdit: App {
     }
 
     var body: some Scene {
-        WelcomeScene()
+        Group {
+            WelcomeScene()
+
+#if os(macOS)
+            // On macOS, the "About" view is displayed as a window.
+            // On iOS, it is presented as a sheet.
+            AboutScene()
+
+            SettingsScene()
+#endif
+        }
     }
 }
 
@@ -25,6 +35,12 @@ private extension CodeEdit {
         )
         ServiceContainer.register(
             DocumentService()
+        )
+        ServiceContainer.register(
+            FileService()
+        )
+        ServiceContainer.register(
+            SceneService()
         )
     }
 }

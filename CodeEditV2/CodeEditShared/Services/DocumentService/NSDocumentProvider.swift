@@ -27,7 +27,7 @@ final class NSDocumentProvider: NSDocumentController, DocumentProvider {
         
         self.openDocument(withContentsOf: newDocumentUrl, display: true) { _, _, _ in }
     }
-    
+
     private var newDocumentUrl: URL? {
         let panel = NSSavePanel()
         guard panel.runModal() == .OK else {

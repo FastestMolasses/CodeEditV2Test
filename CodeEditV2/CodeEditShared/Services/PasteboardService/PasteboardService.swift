@@ -24,7 +24,7 @@ final class PasteboardService {
         self.pasteboard = UIPasteboardProvider.self
 #endif
     }
-    
+
     /// Clears the pasteboard
     func clear() {
         self.pasteboard.clear()

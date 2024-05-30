@@ -22,16 +22,16 @@ struct EffectView: View {
     }
 
     var body: some View {
-        #if os(macOS)
+#if os(macOS)
         NSViewEffectWrapper(material: material.nsMaterial, blendingMode: blendingMode.nsBlendingMode, emphasized: emphasized)
-        #elseif os(iOS)
+#elseif os(iOS)
         UIViewEffectWrapper(style: material.uiBlurEffectStyle, emphasized: emphasized)
-        #endif
+#endif
     }
 
     // Mapping enum for multiplatform support
     enum Material {
-        case headerView, selection, underWindowBackground
+        case headerView, selection, underWindowBackground, popover, menu
         
         #if os(macOS)
         var nsMaterial: NSVisualEffectView.Material {
@@ -39,6 +39,8 @@ struct EffectView: View {
             case .headerView: return .headerView
             case .selection: return .selection
             case .underWindowBackground: return .underWindowBackground
+            case .popover: return .popover
+            case .menu: return .menu
             }
         }
         #elseif os(iOS)
@@ -46,6 +48,8 @@ struct EffectView: View {
             switch self {
             case .headerView, .underWindowBackground: return .systemMaterial
             case .selection: return .dark // TODO: Example mapping, adjust as needed
+            case .popover: return .systemChromeMaterial // TODO: FIND EQUIVALENT TO MACOS .POPOVER
+            case .menu: return .prominent
             }
         }
         #endif

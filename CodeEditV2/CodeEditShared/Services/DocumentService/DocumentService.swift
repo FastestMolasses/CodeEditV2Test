@@ -50,27 +50,27 @@ final class DocumentService {
         self.documentProvider = UIDocumentProvider()
 #endif
     }
-    
+
     func newDocument(_ sender: Any? = nil) {
         documentProvider.newDocument(sender)
     }
-    
+
     func openDocument(_ sender: Any? = nil) {
         documentProvider.openDocument(sender)
     }
-    
+
     func openDocument(withContentsOf url: URL, display displayDocument: Bool, completionHandler: @escaping (Document?, Bool, Error?) -> Void) {
         documentProvider.openDocument(withContentsOf: url, display: displayDocument, completionHandler: completionHandler)
     }
-    
+
     func openDocument(onCompletion: @escaping (Document?, Bool) -> Void, onCancel: @escaping () -> Void) {
         documentProvider.openDocument(onCompletion: onCompletion, onCancel: onCancel)
     }
-    
+
     func removeDocument(_ document: Document) {
         documentProvider.removeDocument(document)
     }
-    
+
     func clearRecentDocuments(_ sender: Any? = nil) {
         documentProvider.clearRecentDocuments(sender)
     }

@@ -11,7 +11,7 @@ struct WelcomeScene: Scene {
     
     // TODO: RE-ENABLE FOR WHEN SETTINGS IMPLEMENTED FOR IOS
     //    @ObservedObject var settings = Settings.shared
-    
+
     var body: some Scene {
 #if os(macOS)
         Window("Welcome To CodeEdit", id: SceneID.welcome.rawValue) {
@@ -30,14 +30,16 @@ struct WelcomeScene: Scene {
         .windowResizability(.contentSize)
 #elseif os(iOS)
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ContentView()
+            }
         }
 #endif
     }
-    
+
     struct ContentView: View {
         @Service private var documentService: DocumentService
-        
+
         @Environment(\.dismiss)
         var dismiss
         @Environment(\.openWindow)
